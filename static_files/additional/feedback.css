@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+.container-fb {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+
+/* Darker chat container */
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+
+/* Clear floats */
+
+.container-fb::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+/* Style time text */
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+
+/* Style time text */
+
+.time-left {
+    float: left;
+    color: #999;
+}
+
+.feedback-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Acme', sans-serif;
+}
+
+.feedback-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 400px;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.mid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.head,
+.mid,
+.textarea,
+.end {
+    padding: 15px;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.s {
+    width: 1.5px;
+    height: 20px;
+    background-color: black;
+    border-radius: 100px;
+}
+
+.s1 {
+    transform: translateX(1.5px) rotate(45deg);
+}
+
+.s2 {
+    transform: rotate(-45deg);
+}
+
+.textarea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#id_feedback p {
+    font-size: 18px;
+}
+
+#id_feedback {
+    outline: none;
+    resize: none;
+    height: 100px;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.end {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sub {
+    background: gold;
+    border: 1px solid transparent;
+    transition: 0.1s linear;
+}
+
+.skp {
+    transition: 0.1s linear;
+    border: 1px solid black;
+}
+
+.skp:hover {
+    background-color: black;
+    color: white;
+}
+
+.sub:hover {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}

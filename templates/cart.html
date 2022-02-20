@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'additional/cart.css' %}">
+{% endblock css %}
+{% block content %}
+{% if  order.items.all  %}
+
+<div class="container-fluid mt-5">
+    <h2 class="mb-5 text-center">Shopping Cart</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="table-responsive">
+                <table id="myTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th class="text-right"><span id="amount" class="amount">Amount</span> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pro  in  order.items.all %}
+
+                        <tr>
+                            <td>
+                                {{forloop.counter}}
+                            </td>
+                            <td>
+                                <div class="product-img">
+                                    <div class="img-prdct"><img src="{{pro.item.image.url}}"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>{{pro.item.title}}</p>
+                            </td>
+                            <td>
+                                <div class="button-container text-center">
+                                    <a class="cart-qty-minus" type="button" href="{{pro.get_single_add_from_cart}}"><i
+                                            class="fas fa-plus p-0 mt-2 ml-2"></i></a>
+                                    <input type="text" name="qty" min="0" class="qty form-control" disabled
+                                        value="{{pro.quantity}}" />
+                                    <a class="cart-qty-minus" type="button"
+                                        href="{{pro.get_single_delete_from_cart}}"><i
+                                            class="fas fa-minus  p-0 mt-2 ml-2"></i></a>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="text" value="{{pro.item.price}}" class="price form-control" disabled>
+                            </td>
+                            <td align="right">$ <span id="amount"
+                                    class="amount">{{pro.get_each_order_total_price}}</span></td>
+                            <td><a href="{{pro.get_delete_all_qty_of_instance}}"><i class="fas fa-trash"
+                                        style="color:red;"></i></a></td>
+
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td align="right"><strong>TOTAL = $ <span id="total"
+                                        class="total">{{order.get_total_price}}</span></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="max-width:50%;">
+    <a href="{% url 'core:checkout' %}" class="btn btn-warning btn-block">Proccessing checkout</a>
+</div>
+
+{% else %}
+<div class="container-fluid mt-5 text-center " style="width:50%;color:black;">
+    <h1>Your Cart Is Empty</h1>
+    <i class="fa fa-shopping-cart" style="font-size:100px;"></i>
+    <a style="display:block; color:black; font-size:50px;" href="{% url 'core:home' %}" class="btn btn-success btn-md my-0 p mt-xl-5 ">Let's shopping
+      </a>
+</div>
+{% endif %}
+
+{% endblock content %}

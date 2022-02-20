@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'additional/feedback.css' %}">
+{% endblock css %}
+<main class="mt-5 pt-4">
+  <div class="container dark-grey-text mt-5">
+    <div class="row wow fadeIn">
+      <div class="col-md-6 mb-4">
+        <img src="{{item.image.url}}" class="img-fluid" alt="">
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="p-4">
+          <div class="mb-3">
+            <a href="">
+              <span class="badge purple mr-1">{{item.get_category_display}}</span>
+            </a>
+            <a href="">
+              <span class="badge blue mr-1">New</span>
+            </a>
+            <a href="">
+              <span class="badge red mr-1">Bestseller</span>
+            </a>
+          </div>
+
+          <p class="lead">
+            <span class="mr-1">
+              {% if item.discount_price %}
+              <del>${{item.price}}</del>
+              <span>${{item.discount_price}}</span>
+              {% else %}
+              <span class="mr-1">
+                <span>${{item.price}}</span>
+                {% endif %}
+              </span>
+          </p>
+
+          <p class="lead font-weight-bold">Description</p>
+
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
+            sint voluptatibus!
+            Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
+
+          <a href="{{item.get_add_to_cart}}" class="btn btn-primary btn-md my-0 p">Add to cart
+            <i class="fas fa-shopping-cart ml-1"></i>
+          </a>
+          <a href="{{item.get_delete_from_cart}}" class="btn btn-danger btn-md my-0 p">remove from cart
+            <i class="fas fa-trash ml-1"></i>
+          </a>
+        </div>
+        <!--Content-->
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+    <hr>
+
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center wow fadeIn">
+
+      <!--Grid column-->
+      <div class="col-md-6 text-center">
+
+      </div>
+    </div>
+    {% if fb %}
+    {% for f in fb  %}
+    <div class="container-fb">
+      <span class="time-right">{{f.user.username}}</span>
+
+      <p>{{f.feedback}}</p>
+      <span class="time-right">{{f.created.time}}    {{f.created.date}}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row wow fadeIn">
+
+      <!--Grid column-->
+      <div class="col-lg-4 col-md-6 mb-4">
+
+        <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+      </div>
+      
+  </div>
+  <div class="feedback-content">
+    <div class="feedback-container container">
+        <div class="head">
+            <div class="heading"><h1>Share your experience</h1></div>
+        </div>
+  <form method = "POST" action="{{item.get_feedback}}">
+    {% csrf_token %}
+        <div class="textarea">
+            <p>Share your experience</p>
+            {{form.feedback}}
+        </div>
+        <div class="end">
+            <div class="submission">
+                <button class="sub btn btn-block" type="submit">Send</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+{% endblock content %}
